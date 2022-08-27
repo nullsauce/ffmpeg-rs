@@ -3,6 +3,7 @@ on: workflow_dispatch
 jobs:
   release:
     name: Create release
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: actions-rs/toolchain@v1
