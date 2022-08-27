@@ -1,6 +1,6 @@
 [package]
 name = "ffmpeg-rs"
-version = "5.0.7"
+version = "5.0.8"
 build = "build.rs"
 
 authors = [
