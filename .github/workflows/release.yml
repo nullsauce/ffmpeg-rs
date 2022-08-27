@@ -4,6 +4,7 @@ jobs:
   release:
     name: Create release
     runs-on: ubuntu-latest
+    container: jrottenberg/ffmpeg:5.0-ubuntu
     steps:
     - uses: actions/checkout@v2
     - uses: actions-rs/toolchain@v1
