@@ -1,26 +1,15 @@
 name: create release
-on:
-  push:
-    tags:
-      - "v*"
+on: workflow_dispatch
 jobs:
   release:
     name: Create release
-    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Generate release notes
-        run: |
-          cat >release_notes.md <<EOF
-          See [CHANGELOG.md](https://github.com/flavioroth/ffmpeg-rs/blob/${GITHUB_REF##*/}/CHANGELOG.md) for changes.
-          EOF
-      - name: Create release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          body_path: release_notes.md
-          draft: false
-          prerelease: false
+    - uses: actions/checkout@v2
+    - uses: actions-rs/toolchain@v1
+      with:
+          toolchain: stable
+          override: true
+    - uses: katyo/publish-crates@v1
+      with:
+          registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+          dry-run: true
