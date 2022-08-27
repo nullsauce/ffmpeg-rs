@@ -6,7 +6,7 @@ Currently supported FFmpeg versions: 3.4.x through 4.4.x.
 
 **Note: This fork has not been released on crates.io yet. For instructions and documentation please refer to the upstream repository pages listed below:**
 
-Build instructions can be found on the [wiki](https://github.com/zmwangx/rust-ffmpeg/wiki/Notes-on-building).
+Build instructions can be found on the [wiki](https://github.com/flavioroth/rust-ffmpeg/wiki/Notes-on-building).
 
 Documentation:
 - [docs.rs](https://docs.rs/ffmpeg-next/);
