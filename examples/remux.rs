@@ -1,14 +1,13 @@
-extern crate ffmpeg_next as ffmpeg;
-
+extern crate ffmpeg_rs;
 use std::env;
 
-use ffmpeg::{codec, encoder, format, log, media, Rational};
+use ffmpeg_rs::{codec, encoder, format, log, media, Rational};
 
 fn main() {
     let input_file = env::args().nth(1).expect("missing input file");
     let output_file = env::args().nth(2).expect("missing output file");
 
-    ffmpeg::init().unwrap();
+    ffmpeg_rs::init().unwrap();
     log::set_level(log::Level::Warning);
 
     let mut ictx = format::input(&input_file).unwrap();
