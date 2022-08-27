@@ -1,15 +1,17 @@
-This is a fork of [rust-ffmpeg](https://github.com/zmwangx/rust-ffmpeg) crate by [zmwangx](https://github.com/zmwangx/rust-ffmpeg) where PR are welcome and actually merged.
+### Rust FFmpeg wrapper
 
 [![build](https://github.com/flavioroth/ffmpeg-rs/actions/workflows/build.yml/badge.svg)](https://github.com/flavioroth/ffmpeg-rs/actions/workflows/build.yml)
 
-Currently supported FFmpeg versions: 3.4.x through 4.4.x.
+Pull requests are welcome. This is originally a fork of [rust-ffmpeg](https://github.com/zmwangx/rust-ffmpeg) crate by [zmwangx](https://github.com/zmwangx/rust-ffmpeg).
 
-**Note: This fork has not been released on crates.io yet. For instructions and documentation please refer to the upstream repository pages listed below:**
+--------------------
+
+Currently supported FFmpeg versions: 3.4.x through 4.4.x.
 
 Build instructions can be found on the [wiki](https://github.com/flavioroth/rust-ffmpeg/wiki/Notes-on-building).
 
 Documentation:
-- [docs.rs](https://docs.rs/ffmpeg-next/);
+- [docs.rs](https://docs.rs/ffmpeg-rs/);
 - [FFmpeg user manual](https://ffmpeg.org/ffmpeg-all.html);
 - [FFmpeg Doxygen](https://ffmpeg.org/doxygen/trunk/).
 
@@ -18,3 +20,5 @@ Documentation:
 *See [CHANGELOG.md](CHANGELOG.md) for other information on version upgrades.*
 
 A word on versioning: major and minor versions of this crate track major and minor versions of FFmpeg, e.g. 4.2.x of this crate has been updated to support the 4.2.x series of FFmpeg. Patch level is reserved for changes to this crate and does not track FFmpeg patch versions. Since we can only freely bump the patch level, versioning of this crate differs from semver: minor versions may behave like semver major versions and introduce backward-incompatible changes; patch versions may behave like semver minor versions and introduce new APIs. Please peg the version you use accordingly.
+
+
