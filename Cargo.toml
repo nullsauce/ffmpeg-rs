@@ -1,6 +1,6 @@
 [package]
 name = "ffmpeg-rs"
-version = "5.0.4"
+version = "5.0.5"
 build = "build.rs"
 
 authors = [
@@ -10,10 +10,10 @@ authors = [
 ]
 license = "WTFPL"
 
-description = "Safe FFmpeg wrapper (FFmpeg 4 compatible fork of the ffmpeg crate)"
-documentation = "https://docs.rs/ffmpeg-next"
-homepage = "https://github.com/zmwangx/rust-ffmpeg#readme"
-repository = "https://github.com/zmwangx/rust-ffmpeg"
+description = "FFmpeg wrapper (FFmpeg 4 compatible fork of the ffmpeg crate)"
+documentation = "https://docs.rs/ffmpeg-rs"
+homepage = "https://github.com/flavioroth/ffmpeg-rs"
+repository = "https://github.com/flavioroth/ffmpeg-rs"
 readme = "README.md"
 keywords = ["ffmpeg", "multimedia", "video", "audio"]
 categories = ["multimedia"]
