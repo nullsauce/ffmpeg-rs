@@ -1,31 +1,30 @@
-extern crate ffmpeg_next as ffmpeg;
-
+extern crate ffmpeg_rs;
 use std::env;
 
-fn main() -> Result<(), ffmpeg::Error> {
-    ffmpeg::init().unwrap();
+fn main() -> Result<(), ffmpeg_rs::Error> {
+    ffmpeg_rs::init().unwrap();
 
-    match ffmpeg::format::input(&env::args().nth(1).expect("missing file")) {
+    match ffmpeg_rs::format::input(&env::args().nth(1).expect("missing file")) {
         Ok(context) => {
             for (k, v) in context.metadata().iter() {
                 println!("{}: {}", k, v);
             }
 
-            if let Some(stream) = context.streams().best(ffmpeg::media::Type::Video) {
+            if let Some(stream) = context.streams().best(ffmpeg_rs::media::Type::Video) {
                 println!("Best video stream index: {}", stream.index());
             }
 
-            if let Some(stream) = context.streams().best(ffmpeg::media::Type::Audio) {
+            if let Some(stream) = context.streams().best(ffmpeg_rs::media::Type::Audio) {
                 println!("Best audio stream index: {}", stream.index());
             }
 
-            if let Some(stream) = context.streams().best(ffmpeg::media::Type::Subtitle) {
+            if let Some(stream) = context.streams().best(ffmpeg_rs::media::Type::Subtitle) {
                 println!("Best subtitle stream index: {}", stream.index());
             }
 
             println!(
                 "duration (seconds): {:.2}",
-                context.duration() as f64 / f64::from(ffmpeg::ffi::AV_TIME_BASE)
+                context.duration() as f64 / f64::from(ffmpeg_rs::ffi::AV_TIME_BASE)
             );
 
             for stream in context.streams() {
@@ -42,11 +41,12 @@ fn main() -> Result<(), ffmpeg::Error> {
                 println!("\tdiscard: {:?}", stream.discard());
                 println!("\trate: {}", stream.rate());
 
-                let codec = ffmpeg::codec::context::Context::from_parameters(stream.parameters())?;
+                let codec =
+                    ffmpeg_rs::codec::context::Context::from_parameters(stream.parameters())?;
                 println!("\tmedium: {:?}", codec.medium());
                 println!("\tid: {:?}", codec.id());
 
-                if codec.medium() == ffmpeg::media::Type::Video {
+                if codec.medium() == ffmpeg_rs::media::Type::Video {
                     if let Ok(video) = codec.decoder().video() {
                         println!("\tbit_rate: {}", video.bit_rate());
                         println!("\tmax_rate: {}", video.max_bit_rate());
@@ -67,7 +67,7 @@ fn main() -> Result<(), ffmpeg::Error> {
                         println!("\tvideo.references: {}", video.references());
                         println!("\tvideo.intra_dc_precision: {}", video.intra_dc_precision());
                     }
-                } else if codec.medium() == ffmpeg::media::Type::Audio {
+                } else if codec.medium() == ffmpeg_rs::media::Type::Audio {
                     if let Ok(audio) = codec.decoder().audio() {
                         println!("\tbit_rate: {}", audio.bit_rate());
                         println!("\tmax_rate: {}", audio.max_bit_rate());

@@ -159,7 +159,7 @@ impl fmt::Display for Error {
 
 impl fmt::Debug for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
-        f.write_str("ffmpeg::Error(")?;
+        f.write_str("ffmpeg_rs::Error(")?;
         f.write_str(&format!("{}: ", AVUNERROR((*self).into())))?;
         fmt::Display::fmt(self, f)?;
         f.write_str(")")

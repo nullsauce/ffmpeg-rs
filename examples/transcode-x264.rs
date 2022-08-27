@@ -14,14 +14,12 @@
 //
 //   transcode-x264 input.flv output.mp4
 //   transcode-x264 input.mkv output.mkv 'preset=veryslow,crf=18'
-
-extern crate ffmpeg_next as ffmpeg;
-
+extern crate ffmpeg_rs;
 use std::collections::HashMap;
 use std::env;
 use std::time::Instant;
 
-use ffmpeg::{
+use ffmpeg_rs::{
     codec, decoder, encoder, format, frame, log, media, picture, Dictionary, Packet, Rational,
 };
 
@@ -45,9 +43,9 @@ impl Transcoder {
         ost_index: usize,
         x264_opts: Dictionary,
         enable_logging: bool,
-    ) -> Result<Self, ffmpeg::Error> {
+    ) -> Result<Self, ffmpeg_rs::Error> {
         let global_header = octx.format().flags().contains(format::Flags::GLOBAL_HEADER);
-        let decoder = ffmpeg::codec::context::Context::from_parameters(ist.parameters())?
+        let decoder = ffmpeg_rs::codec::context::Context::from_parameters(ist.parameters())?
             .decoder()
             .video()?;
         let mut ost = octx.add_stream(encoder::find(codec::Id::H264))?;
@@ -175,7 +173,7 @@ fn main() {
 
     eprintln!("x264 options: {:?}", x264_opts);
 
-    ffmpeg::init().unwrap();
+    ffmpeg_rs::init().unwrap();
     log::set_level(log::Level::Info);
 
     let mut ictx = format::input(&input_file).unwrap();
