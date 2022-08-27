@@ -7,6 +7,10 @@ jobs:
     container: jrottenberg/ffmpeg:5.0-ubuntu
     steps:
     - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: |
+        apt update
+        apt install -y --no-install-recommends clang curl pkg-config
     - uses: actions-rs/toolchain@v1
       with:
           toolchain: stable
