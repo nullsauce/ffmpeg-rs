@@ -7,7 +7,7 @@ use libc;
 
 use super::common::Context;
 use super::destructor;
-use codec::traits;
+use codec::{traits, Flags};
 use ffi::*;
 use {format, ChapterMut, Dictionary, Error, Rational, StreamMut};
 
@@ -83,6 +83,12 @@ impl Output {
             let index = (*self.ctx.as_ptr()).nb_streams - 1;
 
             Ok(StreamMut::wrap(&mut self.ctx, index as usize))
+        }
+    }
+
+    pub fn set_flags(&mut self, value: Flags) {
+        unsafe {
+            (*self.as_mut_ptr()).flags = value.bits() as libc::c_int;
         }
     }
 
