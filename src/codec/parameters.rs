@@ -3,7 +3,9 @@ use std::rc::Rc;
 
 use super::{Context, Id};
 use ffi::*;
+use libc::{c_float, c_int};
 use media;
+use {codec, format};
 
 pub struct Parameters {
     ptr: *mut AVCodecParameters,
@@ -42,6 +44,42 @@ impl Parameters {
 
     pub fn id(&self) -> Id {
         unsafe { Id::from((*self.as_ptr()).codec_id) }
+    }
+
+    #[inline]
+    pub fn set_width(&mut self, value: u32) {
+        unsafe {
+            (*self.as_mut_ptr()).width = value as c_int;
+        }
+    }
+
+    #[inline]
+    pub fn set_height(&mut self, value: u32) {
+        unsafe {
+            (*self.as_mut_ptr()).height = value as c_int;
+        }
+    }
+
+    #[inline]
+    pub fn set_format(&mut self, format: format::Pixel) {
+        let format: codec::AVPixelFormat = format.into();
+        unsafe {
+            (*self.as_mut_ptr()).format = format as c_int;
+        }
+    }
+
+    #[inline]
+    pub fn set_codec_type(&mut self, codec_type: media::Type) {
+        unsafe {
+            (*self.as_mut_ptr()).codec_type = codec_type.into();
+        }
+    }
+
+    #[inline]
+    pub fn set_codec(&mut self, codec_id: codec::Id) {
+        unsafe {
+            (*self.as_mut_ptr()).codec_id = codec_id.into();
+        }
     }
 }
 
