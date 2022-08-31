@@ -3,7 +3,7 @@ use std::rc::Rc;
 
 use super::{Context, Id};
 use ffi::*;
-use libc::{c_float, c_int};
+use libc::c_int;
 use media;
 use {codec, format};
 
