@@ -365,6 +365,14 @@ impl Video {
         }
     }
 
+    // Simple function to get the extradata bytes from the encoder
+    // should it be needed in the future
+    #[inline]
+    pub fn get_extradata(&mut self) -> &[u8] {
+        let extradata_size = unsafe { (*self.as_ptr()).extradata_size } as i32 as usize;
+        unsafe { std::slice::from_raw_parts((*self.as_ptr()).extradata, extradata_size) }
+    }
+
     #[inline]
     pub fn set_colorspace(&mut self, value: color::Space) {
         unsafe {
