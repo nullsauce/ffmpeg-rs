@@ -76,9 +76,26 @@ impl Parameters {
     }
 
     #[inline]
-    pub fn set_codec(&mut self, codec_id: codec::Id) {
+    pub fn set_codec_id(&mut self, codec_id: codec::Id) {
         unsafe {
             (*self.as_mut_ptr()).codec_id = codec_id.into();
+        }
+    }
+
+    #[inline]
+    pub fn set_extradata(&mut self, mut extradata: Vec<u8>) {
+        unsafe {
+            (*self.as_mut_ptr()).extradata_size = extradata.len() as libc::c_int;
+        }
+        extradata.extend(vec![0; AV_INPUT_BUFFER_PADDING_SIZE as usize]);
+        let mut slice = extradata.into_boxed_slice();
+        let ptr = slice.as_mut_ptr();
+
+        // Leave the memory untracked so it can be freed when the parameters are
+        // dropped through the avcodec_parameters_free call.
+        std::mem::forget(slice);
+        unsafe {
+            (*self.as_mut_ptr()).extradata = ptr;
         }
     }
 }
