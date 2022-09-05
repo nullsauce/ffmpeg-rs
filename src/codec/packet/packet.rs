@@ -102,6 +102,49 @@ impl Packet {
         self.flags().contains(Flags::KEY)
     }
 
+    // Checks if a set of non-decoded packets contains a key frame
+    // H264 NAL by checking the first NAL packet. Note that SPS
+    // and PPS are filtered away.
+    pub fn starts_with_keyframe(&self) -> Option<bool> {
+        fn is_nal_header(data: &[u8]) -> bool {
+            match data.len() {
+                x if x < 3 => false,
+                _ => data[0..3] == [0, 0, 1],
+            }
+        }
+
+        fn nal_unit_type(mut byte: u8) -> u8 {
+            byte &= 31; // Mask out the first 3 higher order bits
+            byte
+        }
+
+        fn nal_ref_idc(mut byte: u8) -> u8 {
+            byte &= 96; // Mask out everything but the second and third higher order bits
+            byte
+        }
+
+        if let Some(data) = self.data() {
+            let mut iter = data.iter();
+            loop {
+                if is_nal_header(iter.as_slice()) {
+                    let nalu_type = nal_unit_type(iter.as_slice()[3]);
+                    let nalu_ref_idc = nal_ref_idc(iter.as_slice()[3]);
+
+                    // We have a key frame
+                    if nalu_ref_idc > 0 && nalu_type == 5 {
+                        return Some(true);
+                    } else if nalu_type != 7 && nalu_type != 8 {
+                        return Some(false);
+                    };
+                }
+                if iter.next().is_none() {
+                    break;
+                };
+            }
+        }
+        None
+    }
+
     #[inline]
     pub fn is_corrupt(&self) -> bool {
         self.flags().contains(Flags::CORRUPT)
