@@ -1,7 +1,7 @@
 use std::any::Any;
 use std::rc::Rc;
 
-use super::{Context, Id};
+use super::Context;
 use ffi::*;
 use libc::c_int;
 use media;
@@ -38,12 +38,19 @@ impl Parameters {
         }
     }
 
+    #[deprecated(since = "5.1.1", note = "Use codec_type instead")]
     pub fn medium(&self) -> media::Type {
         unsafe { media::Type::from((*self.as_ptr()).codec_type) }
     }
 
-    pub fn id(&self) -> Id {
-        unsafe { Id::from((*self.as_ptr()).codec_id) }
+    #[deprecated(since = "5.1.1", note = "Use codec_id instead")]
+    pub fn id(&self) -> codec::Id {
+        unsafe { codec::Id::from((*self.as_ptr()).codec_id) }
+    }
+
+    #[inline]
+    pub fn width(&self) -> u32 {
+        unsafe { (*self.as_ptr()).width as u32 }
     }
 
     #[inline]
@@ -54,10 +61,20 @@ impl Parameters {
     }
 
     #[inline]
+    pub fn height(&self) -> u32 {
+        unsafe { (*self.as_ptr()).height as u32 }
+    }
+
+    #[inline]
     pub fn set_height(&mut self, value: u32) {
         unsafe {
             (*self.as_mut_ptr()).height = value as c_int;
         }
+    }
+
+    #[inline]
+    pub fn format(&self) -> codec::AVPixelFormat {
+        unsafe { std::mem::transmute::<_, AVPixelFormat>((*self.as_ptr()).format) }
     }
 
     #[inline]
@@ -69,6 +86,11 @@ impl Parameters {
     }
 
     #[inline]
+    pub fn codec_type(&self) -> media::Type {
+        unsafe { (*self.as_ptr()).codec_type.into() }
+    }
+
+    #[inline]
     pub fn set_codec_type(&mut self, codec_type: media::Type) {
         unsafe {
             (*self.as_mut_ptr()).codec_type = codec_type.into();
@@ -76,10 +98,21 @@ impl Parameters {
     }
 
     #[inline]
+    pub fn codec_id(&self) -> codec::Id {
+        unsafe { (*self.as_ptr()).codec_id.into() }
+    }
+
+    #[inline]
     pub fn set_codec_id(&mut self, codec_id: codec::Id) {
         unsafe {
             (*self.as_mut_ptr()).codec_id = codec_id.into();
         }
+    }
+
+    #[inline]
+    pub fn extradata(&mut self) -> &[u8] {
+        let extradata_size = unsafe { (*self.as_ptr()).extradata_size } as i32 as usize;
+        unsafe { std::slice::from_raw_parts((*self.as_ptr()).extradata, extradata_size) }
     }
 
     #[inline]

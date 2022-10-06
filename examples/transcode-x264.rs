@@ -191,7 +191,7 @@ fn main() {
     let mut transcoders = HashMap::new();
     let mut ost_index = 0;
     for (ist_index, ist) in ictx.streams().enumerate() {
-        let ist_medium = ist.parameters().medium();
+        let ist_medium = ist.parameters().codec_type();
         if ist_medium != media::Type::Audio
             && ist_medium != media::Type::Video
             && ist_medium != media::Type::Subtitle
