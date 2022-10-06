@@ -1,6 +1,8 @@
-use std::ffi::CString;
+use std::ffi::{c_int, CString};
 use std::mem;
 use std::ops::{Deref, DerefMut};
+
+use crate::format::flag::SeekFlags;
 
 use super::common::Context;
 use super::destructor;
@@ -111,6 +113,26 @@ impl Input {
     pub fn play(&mut self) -> Result<(), Error> {
         unsafe {
             match av_read_play(self.as_mut_ptr()) {
+                0 => Ok(()),
+                e => Err(Error::from(e)),
+            }
+        }
+    }
+
+    #[inline]
+    pub fn seek_frame(
+        &mut self,
+        stream_index: usize,
+        timestamp: i64,
+        flags: SeekFlags,
+    ) -> Result<(), Error> {
+        unsafe {
+            match av_seek_frame(
+                self.as_mut_ptr(),
+                stream_index as c_int,
+                timestamp,
+                c_int::from(flags),
+            ) {
                 0 => Ok(()),
                 e => Err(Error::from(e)),
             }

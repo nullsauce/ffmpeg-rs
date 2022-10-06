@@ -1,4 +1,5 @@
 pub mod flag;
+pub use self::flag::SeekFlags;
 pub use self::flag::Flags;
 
 mod input;

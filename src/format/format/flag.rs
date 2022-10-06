@@ -24,3 +24,18 @@ bitflags! {
         const SEEK_TO_PTS   = AVFMT_SEEK_TO_PTS;
     }
 }
+
+bitflags! {
+    pub struct SeekFlags: c_int {
+        const BACKWARD = AVSEEK_FLAG_BACKWARD;
+        const BYTE = AVSEEK_FLAG_BYTE;
+        const ANY = AVSEEK_FLAG_ANY;
+        const FRAME = AVSEEK_FLAG_FRAME;
+    }
+}
+
+impl From<SeekFlags> for c_int {
+    fn from(flags: SeekFlags) -> Self {
+        flags.into()
+    }
+}
