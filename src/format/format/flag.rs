@@ -33,9 +33,3 @@ bitflags! {
         const FRAME = AVSEEK_FLAG_FRAME;
     }
 }
-
-impl From<SeekFlags> for c_int {
-    fn from(flags: SeekFlags) -> Self {
-        flags.into()
-    }
-}

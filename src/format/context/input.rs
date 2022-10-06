@@ -131,7 +131,7 @@ impl Input {
                 self.as_mut_ptr(),
                 stream_index as c_int,
                 timestamp,
-                c_int::from(flags),
+                flags.bits(),
             ) {
                 0 => Ok(()),
                 e => Err(Error::from(e)),
