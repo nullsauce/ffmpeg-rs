@@ -62,6 +62,10 @@ impl Opened {
         }
     }
 
+    pub fn gop_size(&self) -> usize {
+        unsafe { (*self.as_ptr()).gop_size as usize }
+    }
+
     pub fn bit_rate(&self) -> usize {
         unsafe { (*self.as_ptr()).bit_rate as usize }
     }
