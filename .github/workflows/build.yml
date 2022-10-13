@@ -38,34 +38,34 @@ jobs:
         run: |
           cargo fmt -- --check
 
-  # Windows and Macos builds are disabled until they can get fixed
-  # build-test-lint-macos:
-  #   name: macOS - FFmpeg latest - build, test and lint
-  #   runs-on: macos-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Install dependencies
-  #       run: |
-  #         brew install ffmpeg pkg-config
-  #     - name: Set up Rust
-  #       uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: stable
-  #         override: true
-  #         components: rustfmt, clippy
-  #     - name: Build
-  #       run: |
-  #         cargo build --examples
-  #     - name: Test
-  #       run: |
-  #         cargo test --examples
-  #     - name: Lint
-  #       run: |
-  #         cargo clippy --examples -- -D warnings
-  #     - name: Check format
-  #       run: |
-  #         cargo fmt -- --check
+  build-test-lint-macos:
+    name: macOS - FFmpeg latest - build, test and lint
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          brew install ffmpeg pkg-config
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+          components: rustfmt, clippy
+      - name: Build
+        run: |
+          cargo build --examples
+      - name: Test
+        run: |
+          cargo test --examples
+      - name: Lint
+        run: |
+          cargo clippy --examples -- -D warnings
+      - name: Check format
+        run: |
+          cargo fmt -- --check
 
+  # Windows builds are disabled until they can get fixed
   # build-test-lint-windows:
   #   name: Windows - FFmpeg ${{ matrix.ffmpeg_version }} - build, test and lint
   #   runs-on: windows-latest
