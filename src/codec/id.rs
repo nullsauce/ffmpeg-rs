@@ -602,6 +602,17 @@ pub enum Id {
     ADPCM_IMA_ACORN,
     #[cfg(feature = "ffmpeg_5_0")]
     MSNSIREN,
+
+    #[cfg(feature = "ffmpeg_5_1")]
+    VBN,
+    #[cfg(feature = "ffmpeg_5_1")]
+    JPEGXL,
+    #[cfg(feature = "ffmpeg_5_1")]
+    QOI,
+    #[cfg(feature = "ffmpeg_5_1")]
+    PHM,
+    #[cfg(feature = "ffmpeg_5_1")]
+    DFPWM,
 }
 
 impl Id {
@@ -1211,6 +1222,17 @@ impl From<AVCodecID> for Id {
             AV_CODEC_ID_ADPCM_IMA_ACORN => Id::ADPCM_IMA_ACORN,
             #[cfg(feature = "ffmpeg_5_0")]
             AV_CODEC_ID_MSNSIREN => Id::MSNSIREN,
+
+            #[cfg(feature = "ffmpeg_5_1")]
+            AV_CODEC_ID_VBN => Id::VBN,
+            #[cfg(feature = "ffmpeg_5_1")]
+            AV_CODEC_ID_JPEGXL => Id::JPEGXL,
+            #[cfg(feature = "ffmpeg_5_1")]
+            AV_CODEC_ID_QOI => Id::QOI,
+            #[cfg(feature = "ffmpeg_5_1")]
+            AV_CODEC_ID_PHM => Id::PHM,
+            #[cfg(feature = "ffmpeg_5_1")]
+            AV_CODEC_ID_DFPWM => Id::DFPWM,
         }
     }
 }
@@ -1812,6 +1834,17 @@ impl From<Id> for AVCodecID {
             Id::ADPCM_IMA_ACORN => AV_CODEC_ID_ADPCM_IMA_ACORN,
             #[cfg(feature = "ffmpeg_5_0")]
             Id::MSNSIREN => AV_CODEC_ID_MSNSIREN,
+
+            #[cfg(feature = "ffmpeg_5_1")]
+            Id::VBN => AV_CODEC_ID_VBN,
+            #[cfg(feature = "ffmpeg_5_1")]
+            Id::JPEGXL => AV_CODEC_ID_JPEGXL,
+            #[cfg(feature = "ffmpeg_5_1")]
+            Id::QOI => AV_CODEC_ID_QOI,
+            #[cfg(feature = "ffmpeg_5_1")]
+            Id::PHM => AV_CODEC_ID_PHM,
+            #[cfg(feature = "ffmpeg_5_1")]
+            Id::DFPWM => AV_CODEC_ID_DFPWM,
         }
     }
 }
