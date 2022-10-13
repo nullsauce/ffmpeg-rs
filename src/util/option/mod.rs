@@ -26,6 +26,9 @@ pub enum Type {
     ChannelLayout,
     c_ulong,
     bool,
+
+    #[cfg(feature = "ffmpeg_5_1")]
+    ChLayout,
 }
 
 impl From<AVOptionType> for Type {
@@ -51,6 +54,9 @@ impl From<AVOptionType> for Type {
             AV_OPT_TYPE_DURATION => Type::Duration,
             AV_OPT_TYPE_COLOR => Type::Color,
             AV_OPT_TYPE_CHANNEL_LAYOUT => Type::ChannelLayout,
+
+            #[cfg(feature = "ffmpeg_5_1")]
+            AV_OPT_TYPE_CHLAYOUT => Type::ChLayout,
         }
     }
 }
@@ -78,6 +84,9 @@ impl From<Type> for AVOptionType {
             Type::Duration => AV_OPT_TYPE_DURATION,
             Type::Color => AV_OPT_TYPE_COLOR,
             Type::ChannelLayout => AV_OPT_TYPE_CHANNEL_LAYOUT,
+
+            #[cfg(feature = "ffmpeg_5_1")]
+            Type::ChLayout => AV_OPT_TYPE_CHLAYOUT,
         }
     }
 }
