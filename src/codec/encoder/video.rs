@@ -369,7 +369,7 @@ impl Video {
     // should it be needed in the future
     #[inline]
     pub fn get_extradata(&mut self) -> &[u8] {
-        let extradata_size = unsafe { (*self.as_ptr()).extradata_size } as i32 as usize;
+        let extradata_size = unsafe { (*self.as_ptr()).extradata_size } as usize;
         unsafe { std::slice::from_raw_parts((*self.as_ptr()).extradata, extradata_size) }
     }
 
