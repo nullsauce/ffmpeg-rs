@@ -171,7 +171,7 @@ fn main() {
     )
     .expect("invalid x264 options string");
 
-    eprintln!("x264 options: {:?}", x264_opts);
+    eprintln!("x264 options: {x264_opts:?}");
 
     ffmpeg_rs::init().unwrap();
     log::set_level(log::Level::Info);

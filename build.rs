@@ -8,7 +8,7 @@ fn main() {
                 // disable XVMC for ffmpeg 5.1
                 continue;
             }
-            println!(r#"cargo:rustc-cfg=feature="{}""#, feature_name);
+            println!(r#"cargo:rustc-cfg=feature="{feature_name}""#);
         }
     }
 }

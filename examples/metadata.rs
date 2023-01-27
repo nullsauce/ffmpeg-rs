@@ -7,7 +7,7 @@ fn main() -> Result<(), ffmpeg_rs::Error> {
     match ffmpeg_rs::format::input(&env::args().nth(1).expect("missing file")) {
         Ok(context) => {
             for (k, v) in context.metadata().iter() {
-                println!("{}: {}", k, v);
+                println!("{k}: {v}");
             }
 
             if let Some(stream) = context.streams().best(ffmpeg_rs::media::Type::Video) {
@@ -83,7 +83,7 @@ fn main() -> Result<(), ffmpeg_rs::Error> {
             }
         }
 
-        Err(error) => println!("error: {}", error),
+        Err(error) => println!("error: {error}"),
     }
     Ok(())
 }
