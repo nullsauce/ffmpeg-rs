@@ -1,6 +1,6 @@
 ### Rust FFmpeg wrapper
 
-[![build](https://github.com/flavioroth/ffmpeg-rs/actions/workflows/build.yml/badge.svg)](https://github.com/flavioroth/ffmpeg-rs/actions/workflows/build.yml)
+![stable-x86_64](https://github.com/flavioroth/ffmpeg-rs/actions/workflows/build.yml/badge.svg?branch=master)
 
 Pull requests are welcome. This is originally a fork of [rust-ffmpeg](https://github.com/zmwangx/rust-ffmpeg) crate by [zmwangx](https://github.com/zmwangx/rust-ffmpeg).
 
