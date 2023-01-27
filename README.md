@@ -1,5 +1,5 @@
 ### Rust FFmpeg wrapper
-
+[![Cargo](https://img.shields.io/crates/v/ffmpeg-rs.svg)](https://crates.io/crates/ffmpeg-rs)
 ![stable-x86_64](https://github.com/flavioroth/ffmpeg-rs/actions/workflows/build.yml/badge.svg?branch=master)
 
 Pull requests are welcome. This is originally a fork of [rust-ffmpeg](https://github.com/zmwangx/rust-ffmpeg) crate by [zmwangx](https://github.com/zmwangx/rust-ffmpeg).
