@@ -8,7 +8,7 @@ Pull requests are welcome. This is originally a fork of [rust-ffmpeg](https://gi
 
 Currently supported FFmpeg versions: 4.0 through 5.1
 
-Build instructions can be found on the [wiki](https://github.com/flavioroth/rust-ffmpeg/wiki/Notes-on-building).
+Build instructions can be found on the [wiki](https://github.com/zmwangx/rust-ffmpeg/wiki/Notes-on-building).
 
 Documentation:
 - [docs.rs](https://docs.rs/ffmpeg-rs/);
