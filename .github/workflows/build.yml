@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: |
-          brew install ffmpeg pkg-config
+          brew install ffmpeg@5 pkg-config
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -53,15 +53,23 @@ jobs:
           override: true
           components: rustfmt, clippy
       - name: Build
+        env:
+          PKG_CONFIG_PATH: /usr/local/opt/ffmpeg@5/lib/pkgconfig
         run: |
           cargo build --examples
       - name: Test
+        env:
+          PKG_CONFIG_PATH: /usr/local/opt/ffmpeg@5/lib/pkgconfig
         run: |
           cargo test --examples
       - name: Lint
+        env:
+          PKG_CONFIG_PATH: /usr/local/opt/ffmpeg@5/lib/pkgconfig
         run: |
           cargo clippy --examples -- -D warnings
       - name: Check format
+        env:
+          PKG_CONFIG_PATH: /usr/local/opt/ffmpeg@5/lib/pkgconfig
         run: |
           cargo fmt -- --check
 
